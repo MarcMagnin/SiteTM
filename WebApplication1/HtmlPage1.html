@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="jquery-csswatch-master/jquery-csswatch-master/shared/jquery-1.8.2.min.js"></script>
+    <script src="jquery-csswatch-master/jquery-csswatch-master/lib/jquery.csswatch.js"></script>
+    <script src="mousewheel.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $('#orange').on("css-change", function(event, change) {
+                console.log(change.left);
+                $('html, body').stop().animate({
+                    scrollLeft: change.left
+                },20);
+
+            });
+
+            $('#orange').csswatch({
+                props: 'top,left',
+                props_functions: { "top": "offset().top", "left": "offset().left" }
+            });
+
+
+            $(document).click(function () {
+                $("#orange").stop().css('left', '0').animate({ "left": "500px" }, 1500);
+                
+
+            });
+            
+            //element.parent().watch('left,offsetY,offsetLeft', function () {
+            //    console.log('offsetLeft changed... New value: ');
+            //    if (parseFloat($(this).width()) >= 150) {
+            //        $(this).css({ 'background': 'green' });
+            //    }
+            //    if (parseFloat($(this).height()) >= 200) {
+            //        $(this).css({ 'background': 'blue' });
+            //    }
+            //});
+            //element.parent().width = 900;
+            //element.watch('left,offsetY,position', function () {
+            //    console.log('offsetLeft changed... New value: ');
+            //    if (parseFloat($(this).width()) >= 150) {
+            //        $(this).css({ 'background': 'green' });
+            //    }
+            //    if (parseFloat($(this).height()) >= 200) {
+            //        $(this).css({ 'background': 'blue' });
+            //    }
+            //});
+
+
+        });
+    </script>
+</head>
+    <body>
+        <div style="height: 3000px; width: 2500px;background: purple" >
+            
+            <div id="orange" style="position: absolute;height: 50px; width: 50px;background: orange" >
+            
+            </div>
+        </div>
+    </body>
+</html>
+

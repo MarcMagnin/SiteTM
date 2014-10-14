@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'ArcherLight';
+    src: url('archer-light.eot');
+    src: url('archer-light.eot') format('embedded-opentype'),
+         url('archer-light.woff') format('woff'),
+         url('archer-light.ttf') format('truetype'),
+         url('archer-light.svg#ArcherLight') format('svg');
+}
