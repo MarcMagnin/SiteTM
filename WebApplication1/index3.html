@@ -1,0 +1,756 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Editions Thierry Magnier</title>
+<link href="Styles/Slider.css" rel="stylesheet" />
+    <link href="Styles/Tiles3.css" rel="stylesheet" />
+<link href="Styles/Menu3.css" rel="stylesheet" />
+
+
+    <style>
+
+        
+html, body {
+height: 100%;
+width: 100%;
+margin: 0;
+overflow: hidden; 
+}
+/*body {
+    width: 90%;
+    padding-left: 4rem;
+}*/
+
+body{
+
+background-color:black;
+}
+.backgroundHolder {
+    top:0;
+    opacity:0.8;
+    z-index:-1000;
+    position:absolute;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    overflow: hidden; 
+    background-image: url("docs site/Cousins-Karlsson-3.jpg") ;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    /*background-position:98% 98%;*/
+    background-size: cover ;
+
+}
+
+  /*height : 300px;
+  white-space: nowrap;
+  overflow-y: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 1rem;
+  background-color: #ccc;*/
+  
+  
+@media screen and (min-width: 0px) and (max-width:800px) and (max-height:800px) {
+    body {
+    width: 100%;
+    padding-left: 0;
+    }
+    .menu {
+        margin-top: 0px;
+        margin-left: 0px;
+        font-size: 1em;
+        padding-left: 0;
+        text-align: center; 
+    }
+    .tilesContainer {
+        padding-left: 0;
+    }
+    .floatingmenu{
+    width: 100px;
+    
+    }
+
+}
+
+    </style>
+    <script src="jquery-csswatch-master/jquery-csswatch-master/shared/jquery-1.8.2.min.js"></script>
+    <!--contains easing animations as well -->
+    <script src="jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="http://isotope.metafizzy.co/v1/jquery.isotope.min.js"></script>
+    <script>
+  
+        (function (d) { var b = ["DOMMouseScroll", "mousewheel"]; if (d.event.fixHooks) { for (var a = b.length; a;) { d.event.fixHooks[b[--a]] = d.event.mouseHooks } } d.event.special.mousewheel = { setup: function () { if (this.addEventListener) { for (var e = b.length; e;) { this.addEventListener(b[--e], c, false) } } else { this.onmousewheel = c } }, teardown: function () { if (this.removeEventListener) { for (var e = b.length; e;) { this.removeEventListener(b[--e], c, false) } } else { this.onmousewheel = null } } }; d.fn.extend({ mousewheel: function (e) { return e ? this.bind("mousewheel", e) : this.trigger("mousewheel") }, unmousewheel: function (e) { return this.unbind("mousewheel", e) } }); function c(j) { var h = j || window.event, g = [].slice.call(arguments, 1), k = 0, i = true, f = 0, e = 0; j = d.event.fix(h); j.type = "mousewheel"; if (h.wheelDelta) { k = h.wheelDelta / 120 } if (h.detail) { k = -h.detail / 3 } e = k; if (h.axis !== undefined && h.axis === h.HORIZONTAL_AXIS) { e = 0; f = -1 * k } if (h.wheelDeltaY !== undefined) { e = h.wheelDeltaY / 120 } if (h.wheelDeltaX !== undefined) { f = -1 * h.wheelDeltaX / 120 } g.unshift(j, k, f, e); return (d.event.dispatch || d.event.handle).apply(this, g) } })(jQuery);
+
+       
+
+        if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+            $(document).ready(function () {
+                $('body, html').bind('mousewheel', function (event, delta, deltaX, deltaY) {
+                    //$('html, body').stop().animate({scrollLeft: '-='+(400*delta)+'px' });
+                    $('#booksContainer').scrollLeft -= (delta * 40);
+                    /*if(delta < 0){
+                        $('body, html').scrollLeft($('body, html').scrollLeft()+50);
+                      }else{
+                        $('body, html').scrollLeft($('body, html').scrollLeft()-50);
+                    }*/
+                    event.preventDefault();
+                });
+            });
+        }
+        else {
+
+            $window = $(window);
+            $(function () {
+                $('body, html').bind('mousewheel', function (event, delta, deltaX, deltaY) {
+                    
+                    var isHorizontalMode = $window.width() > 500;
+                    if (isHorizontalMode) 
+                        $('#booksContainer').stop().animate({ scrollLeft: '-=' + (500 * delta) + 'px' }, 400, 'easeOutQuint');
+                    else
+                        $('#booksContainer').stop().animate({ scrollTop: '-=' + (500 * delta) + 'px' }, 400, 'easeOutQuint');
+                    event.preventDefault();
+                });
+            });
+        };
+
+        var xStart, yStart = 0;
+
+        document.addEventListener('touchstart', function (e) {
+            xStart = e.touches[0].screenX;
+            yStart = e.touches[0].screenY;
+        });
+
+        document.addEventListener('touchmove', function (e) {
+            var xMovement = Math.abs(e.touches[0].screenX - xStart);
+            var yMovement = Math.abs(e.touches[0].screenY - yStart);
+            if ((yMovement * 3) > xMovement) {
+                e.preventDefault();
+                
+            }
+        });
+     
+
+
+
+      
+        
+        $(document).ready(function () {
+
+
+            var $window = $(window);
+
+
+            $('.tile').click(function () {
+
+                var tileTextArea = $(this).find(".tileText");
+                tileTextArea.slideToggle(0).after(function () {
+
+                });
+
+            });
+
+
+
+            var $container = $('.tilesContainer');
+
+            
+            
+            
+
+
+
+            //////
+            ///// MENU
+            /////
+            
+            var previousMenuItemClicked;
+            $('.floatingmenu').click(function() {
+                //$(this).next().next().slideDown(100);
+                var menuItem = $(this).find("div");
+
+                if (previousMenuItemClicked) {
+                    if (previousMenuItemClicked.is(menuItem)) {
+                        return;
+                    } else {
+                        previousMenuItemClicked.slideToggle(100);
+                    }
+                }
+                menuItem.slideToggle(100);
+                previousMenuItemClicked = menuItem;
+            });
+
+            var previous;
+            $('.menuItem').click('click', function () {
+                var $this = $(this);
+                var test = $this.attr('id-menu');
+                var menu = $(test);
+                if (previous && previous.is(menu)) {
+                    menu.slideUp(200);
+                    previous = null;
+                    return;
+                }
+                if (previous && !previous.is(menu)) {
+                    previous.slideUp(200);
+                } 
+                menu.slideDown(200);
+                previous = menu;
+            });
+
+            var previousValue;
+            function setWindowHeight() {
+                var windowHeight = window.innerHeight;
+                document.body.style.height = windowHeight + "px";
+
+                var isHorizontalMode = $window.width() > 700;
+
+                var containerStyle = isHorizontalMode ? {
+                    height: $window.height() * 0.75,
+                } : {
+                    width: 'auto',
+                    background: 'blue',
+                };
+
+                $container.css(containerStyle);
+            }
+            setWindowHeight();
+                        
+
+            window.addEventListener("resize", setWindowHeight, false);
+            
+        });
+
+    </script>
+    </head>
+<body>
+    <div class="backgroundHolder"></div>
+    <div class="menu">
+            <p class="menuItem" id-menu=".menuCatalogue">catalogue</p>
+            <p class="menuItem" id-menu=".menuUnivers">univers</p>
+            <p class="menuItem" id-menu=".menuActu">actualités</p>
+            <p>professionnels</p>
+            <p>contacts</p>
+    </div>
+    <div class="subMenu menuCatalogue">
+            <p>bla bla test</p>
+    </div>
+    <div class="subMenu menuUnivers">
+            <p>Hehe c'est cool ici non ?</p>
+    </div>
+    <div class="subMenu menuActu">
+        <div class="subSubMenu">
+            <img src="images/72_26519.jpg" />
+            <div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                   
+                </p>
+            </div>    
+        </div>
+        
+    </div>
+
+    <!--    
+        <div class="filters">
+            <ul>
+                <li data-filter="*">Tous les livres</li>
+                <li data-filter=".tag1">monstres</li>
+                <li data-filter=".tag2">animaux</li>
+                <li data-filter=".tag3">poules</li>
+                <li><input id="filterInput" type="text" onkeypress="filterText(event)" /></li>
+               
+            </ul>
+        </div>-->
+    
+<div id="booksContainer" class="tilesContainer">
+
+
+
+        <div class="tile tag1">
+            <img src="images/66_9043.jpg" alt="image" />
+            <span class="tileTitle">Art Factory</span>
+            <div class="tileTextArea">
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+
+
+        <div class="tile tag2">
+            <img src="images/67_1873.jpg" alt="image" />
+            <span class="tileTitle">Art Factory</span>
+            <div class="tileTextArea">
+                
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+                <!--<div class="button">SHOP NOW</div>-->
+            </div>
+        </div>
+
+        <div class="tile tag1">
+            <img src="docs%20site/Cousins%20Karlsson%203_couv.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+                <!--<div class="button">SHOP NOW</div>-->
+            </div>
+        </div>
+
+        <div class="tile tag3">
+            <img src="images/68_68619.jpg" alt="image" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+
+
+        <div class="tile tag3">
+            <img src="images/70_58382.jpg" alt="image" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+
+
+        <div class="tile tag2">
+            <img src="images/71_82238.jpg" alt="image" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+
+
+
+        <div class="tile tag1">
+            <img src="docs%20site/Enfant%20ideal_couv.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+
+        <div class="tile tag1">
+            <img src="images/69_58542.jpg" alt="image" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+
+        <div class="tile tag2">
+            <img src="docs%20site/Odyssee%20Outis2.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+
+        <div class="tile tag3">
+            <img src="images/72_26519.jpg" alt="image" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+
+
+        <div class="tile tag1">
+            <img src="docs%20site/Odyssee%20Outis_couv.jpg" />
+
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+
+        <div class="tile tag2">
+            <img src="images/73_14792.jpg" alt="image" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+
+        <div class="tile Jean Marc Mathis Boris ">
+            <img src="images/Boris/9782364740013.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+                <span class="auteurLink" data-filter=".JeanMarcMathis">du même auteur </span>
+            </div>
+        </div>
+
+        <div class="tile JeanMarcMathis Boris ">
+            <img src="images/Boris/9782364740242.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+                <span class="auteurLink" data-filter=".JeanMarcMathis">du même auteur </span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364740297.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+                <span class="auteurLink" data-filter=".JeanMarcMathis">du même auteur </span>
+            </div>
+        </div>
+
+
+
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364740648.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+                <span class="auteurLink">du même auteur </span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364740822.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+                <span class="auteurLink">du même auteur </span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364741324.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+                <span class="auteurLink">du même auteur </span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364741331.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+                <span class="auteurLink">du même auteur </span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364741416.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+                <span class="auteurLink">du même auteur </span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364742093.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364742239.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364742246.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364743007.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364743175.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364743182.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364743472.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364743489.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364743632.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364743649.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364743830.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364743847.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364743878.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364743885.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364743939.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782364743946.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844202499.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+
+
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844202819.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844203243.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844203540.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844203557.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844203960.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844204271.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844204486.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844204936.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844205452.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844205513.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844205926.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+
+
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844206008.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844206411.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844207241.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844207326.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844207876.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844208170.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844208187.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844208194.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844208477.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844208675.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844208682.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844208699.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844209009.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+        <div class="tile JeanMarcMathis Boris">
+            <img src="images/Boris/9782844209061.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Art Factory</span>
+                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+            </div>
+        </div>
+    <div class="tile JeanMarcMathis Boris">
+        <img src="images/Boris/9782844209207.jpg" />
+        <div class="tileTextArea">
+            <span class="tileTitle">Art Factory</span>
+            <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
+        </div>
+    </div>
+
+    </div>
+
+    
+</body>
+</html>
