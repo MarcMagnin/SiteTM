@@ -63,6 +63,7 @@
     <Content Include="index.html" />
     <Content Include="index2.html" />
     <Content Include="index3.html" />
+    <Content Include="index4.html" />
     <Content Include="isotope\css\style.css" />
     <Content Include="isotope\index.html" />
     <Content Include="isotope\jquery.isotope.js" />
@@ -203,6 +204,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="images\Boris\" />
+    <Folder Include="images\extrait\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

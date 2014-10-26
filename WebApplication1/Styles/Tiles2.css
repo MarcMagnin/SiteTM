@@ -1,16 +1,40 @@
-﻿.hostContainer {
-    margin-right: -150px;
-    background: red;
+﻿.footer {
+    position:absolute;
+    bottom: 0px;
+    right:0px;
+    font-size:0.8em;
 }
+.isotope-hidden {
 
-.tilesContainer {
-    background: blue;
     
-    white-space: nowrap;
-    width: 100% !important;
+    
+    
+    display:none !important;
+}
+.tilesContainer {
+  padding-left:150px;
+    padding-bottom:150px;
+    height: -moz-calc(100% - 250px);
+    height: -webkit-calc(100% - 250px);
+    height: -o-calc(100% - 250px);
+    height: calc(100% - 250px);
+    
+    /*white-space: nowrap;*/
+    width: -moz-calc(100% - 150px) !important;
+    width: -webkit-calc(100% - 150px) !important;
+    width: -o-calc(100% - 150px) !important;
+    width: calc(100% - 150px) !important;
+
 	overflow-y: hidden !important;
 	overflow-x: scroll !important;
 	-webkit-overflow-scrolling: touch;
+
+      
+    scrollbar-base-color : transparent;  
+    scrollbar-track-color : transparent;
+    scrollbar-highlight-color : transparent;
+    scrollbar-arrow-color : transparent;
+    scrollbar-face-color : rgba(3, 255, 8, 0.17);  
 }
 
 
@@ -22,21 +46,35 @@
   display: block;
   clear: both;
 }*/
+p {
+    margin-top : 5px;
+    margin-bottom: 0px;
+}
+
+.smallHeightImage {
+    max-height : 250px;
+        
+}
 
 .tile {
-    display: inline-block;
-
     cursor: pointer;
-  background: rgb(255, 255, 255);
-  /*border: 2px solid #333;*/
-  /*border-color: hsla(0, 0%, 0%, 0.7);*/
-  padding: 5px;
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    background: rgb(255, 255, 255);
+    padding: 5px;
     margin-right: 3px;
-    margin-top: 3px;
-    /*padding-bottom: 25px;*/
-    transition: all .7s ease-out, background 0.2s, width 0s, height 0s,z-index 0s ;
-    -o-transition: all .7s ease-out, background 0.2s, width 0s,height 0s,z-index 0s;
-    -moz-transition: all .7s ease-out, background 0.2s, width 0s,height 0s,z-index 0s;
+    margin-top: 3px; 
+    transition: all .3s ease-out 0;
+    -o-transition: all .3s ease-out 0;
+    -moz-transition: all .3s ease-out 0;
+    -webkit-transition: all .3s ease-out 0;
+
+    -webkit-transition: display 0.3s linear .3s;
+    -o-transition: display 0.3s linear .3s;
+    -moz-transition: display 0.3s linear .3s;
+    transition: display 0.3s linear .3s;
+    
 }
 
 
@@ -55,77 +93,66 @@
 }
 .auteurLink {
     display: none;
-}   
-
-
-/*.tileTextArea {
-    position: absolute;
-    top: -60% ;
-    left: 0;
-    width: 100%;
-    height: 50%;
-    background: rgba(0,0,0,.6);
-    font-size: 1.5em;
-    text-align: center;
-    overflow: hidden;
-    opacity: 0;
-    
-
-    transition: all .2s ease-out 0;
-    -o-transition: all .2s ease-out 0;
-    -moz-transition: all .2s ease-out 0;
-    -webkit-transition: all .2s ease-out 0;
-}*/
-.tileTextArea {
-
-    display: inline;
-    vertical-align: top;
-    vert-align: top;
-    /*padding: 1% 0 0;*/
-    font-size: 1.5em;
-    text-align: left;
- 
- 
-    
-
-    transition: all .2s ease-out 0, color .2s ease-out;
-    -o-transition: all .2s ease-out 0, color .2s ease-out;
-    -moz-transition: all .2s ease-out 0, color .2s ease-out;
-    -webkit-transition: all .2s ease-out 0, color .2s ease-out;
 }
-/*.tileTitle {
-position: absolute;    
-width: 100%;
-    left: -30px;
-    opacity: 0;
 
-      font-size: 20px;
-    font-family: ArcherLight, Helvetica, Arial, sans-serif;
+.tileLeftPart {
+    display :inline;
+    vertical-align:middle;
+    
+}
 
+.tileLeftPartDetails {
+    display:none;
+    -webkit-flex-direction: column;
+   -ms-flex-direction: column;
+   flex-direction: column;
+   overflow:auto;
+       
+}
 
-    transition: all .2s ease-out .2s;
-    -o-transition: all .2s ease-out .2s;
-    -moz-transition: all .2s ease-out .2s;
-    -webkit-transition: all .2s ease-out .2s;
-}*/
+.tileTextArea {
+  
+    /*max-height: -moz-calc(100% - 250px);
+    max-height: -webkit-calc(100% - 250px);
+    max-height: -o-calc(100% - 250px);
+    max-height: calc(100% - 250px);*/
+    
+    display:none;
+
+    padding-left:5px;
+    padding-right:5px;
+    padding-bottom:5px;
+    
+    /*transition: all .2s ease-out 1;
+    -o-transition: all .2s ease-out 1;
+    -moz-transition: all .2s ease-out 1;
+    -webkit-transition: all .2s ease-out 1;*/
+     width:600px;
+    overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.tileTextArea > img {
+    width:95%;
+}
+
 .tileTitle {
-    position: absolute;    
-width: 100%;
-    left: 10px;
-    bottom: 0px;
-    display: none;
-
-      font-size: 20px;
+    font-size: 20px;
     font-family: ArcherLight, Helvetica, Arial, sans-serif;
-
-
-
 }
 
 .tileText {
-    
+    /*-webkit-column-rule: 3px outset #ff00ff;*/
+    /*height: -moz-calc(100% - 45px);
+    height: -webkit-calc(100% - 45px);
+    height: -o-calc(100% - 45px);
+    height: calc(100% - 45px);*/
+   
+    text-align:justify;
 
-    font-size: 18px;
+
+
+    /*font-size: 18px;*/
     font-family: ArcherLight, Helvetica, Arial, sans-serif;
 
 
@@ -133,42 +160,8 @@ width: 100%;
     -o-transition: all .2s ease-out .3s;
     -moz-transition: all .2s ease-out .3s;
 -webkit-transition: all .2s ease-out .3s;
-    display: none;
-}
-.tile:hover .tileTextArea {
-    top: 0%;
-    opacity: 1;
-                                 /* Ici le code pour appliquer une lueur externe */
-    /* 0px de décalage en x, 0px de décalage en y, 12px de flou et la valeur en RGBA soit RedGreenBlueAlpha donc le 0.5 pour 50% d'opacité */
-    /*-webkit-box-shadow: 0px 0px 12px rgba(51,204,255,0.7);
-    -moz-box-shadow: 0px 0px 12px rgba(51,204,255,0.7);
-    box-shadow: 0px 0px 12px rgba(51,204,255,0.7);
-    -webkit-animation: pulse 1.5s infinite ease-in-out;*/ 
-}
-.tile:hover .tileTitle {  left:0;opacity: 1; color: black;}
-/*.tile:hover .tileText {  left:0;opacity: 1;color: black;}*/
-/*.tile:hover img{ opacity: 0.6;}*/
-.tile:hover {
-    background: rgba(255,255,255,.6);
-   
 }
 
-
-
-.tile a {
-    text-decoration: none;
-    color: white;
-    
-}
-
-.tile img {
-
-    transition: all .2s ease-out;
-    -o-transition: all .2s ease-out;
-    -moz-transition: all .2s ease-out;
-    -webkit-transition: all .2s ease-out;
-    
-}
 
 
 .nouveautesTitle {

@@ -1,8 +1,15 @@
 ﻿.tilesContainer {
+
     padding-left:150px;
+    padding-bottom:150px;
+    height: -moz-calc(100% - 250px);
+    height: -webkit-calc(100% - 250px);
+    height: -o-calc(100% - 250px);
+    height: calc(100% - 250px);
     
+    display : -ms-flexbox   ;
     display : flex;
-    display : -ms-flexbox;
+    
     
     -ms-flex-align: start;
 
@@ -11,7 +18,7 @@
 
         flex-direction: column;
     -ms-flex-direction: column;
-
+    
     align-items: flex-start ;
     justify-content:  flex-start ;
 
@@ -19,8 +26,15 @@
 	overflow-y: hidden !important;
 	overflow-x: scroll !important;
 	-webkit-overflow-scrolling: touch;
-}
 
+    
+    scrollbar-base-color : transparent;  
+    scrollbar-track-color : transparent;
+    scrollbar-highlight-color : transparent;
+    scrollbar-arrow-color : transparent;
+    scrollbar-face-color : rgba(3, 255, 8, 0.17);  
+    
+}
 
 /*http://css-tricks.com/arranging-elements-top-bottom-instead-left-right-float/*/
 
@@ -32,108 +46,107 @@
 }*/
 
 .tile {
-    display: inline-block;
-
     cursor: pointer;
-  background: rgb(255, 255, 255);
-  /*border: 2px solid #333;*/
-  /*border-color: hsla(0, 0%, 0%, 0.7);*/
-  padding: 5px;
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    background: rgb(255, 255, 255);
+    padding: 5px;
     margin-right: 3px;
-    margin-top: 3px;
-    /*padding-bottom: 25px;*/
+    margin-top: 3px; 
+    transition: all .2s ease-out 0;
+    -o-transition: all .2s ease-out 0;
+    -moz-transition: all .2s ease-out 0;
+    -webkit-transition: all .2s ease-out 0;
+
+}
+
+
+.open {
+    -webkit-box-flex: 3;
+    -moz-box-flex: 3;
+    -webkit-flex: 3;
+    -ms-flex: 3;
+    flex: 3;
+    background: #666;
+    cursor: pointer;
+    color: white;
+    max-width: 100%;
+}
+
+
+@media all and (max-width:800px) {
+    body {
+    width: 100%;
+    padding-left: 0;
+    }
+    .menu {
+        margin-top: 0px;
+        margin-left: 0px;
+        font-size: 1em;
+        padding-left: 0;
+        text-align: center; 
+    }
+    .tilesContainer {
+        flex-direction: row;
+        padding-left: 0;
+        overflow-y: scroll !important;
+	    overflow-x: hidden  !important;
+    }
+    .floatingmenu{
+    width: 100px;
+    
+    }
+
+}
+
+
+.tileTextArea {
+     max-height: -moz-calc(100% - 50px);
+    max-height: -webkit-calc(100% - 50px);
+    max-height: -o-calc(100% - 50px);
+    max-height: calc(100% - 50px);
+    display:none;
+    padding-left:5px;
+    padding-bottom:5px;
+    
+    /*transition: all .2s ease-out 1;
+    -o-transition: all .2s ease-out 1;
+    -moz-transition: all .2s ease-out 1;
+    -webkit-transition: all .2s ease-out 1;*/
+}
+
+.tileTextArea img{
+     max-width:300px;
+    
+    /*transition: all .2s ease-out 1;
+    -o-transition: all .2s ease-out 1;
+    -moz-transition: all .2s ease-out 1;
+    -webkit-transition: all .2s ease-out 1;*/
+}
+
+.tileTitle {
+    font-size: 20px;
+    font-family: ArcherLight, Helvetica, Arial, sans-serif;
     transition: all .7s ease-out, background 0.2s, width 0s, height 0s,z-index 0s ;
     -o-transition: all .7s ease-out, background 0.2s, width 0s,height 0s,z-index 0s;
     -moz-transition: all .7s ease-out, background 0.2s, width 0s,height 0s,z-index 0s;
 }
 
-
-.univers2 {
-    background: rgba(40, 226, 40, 0.3);
-}
-
-.large {
-    width: 800px;
-    /*height: calc(100% - 200px);*/
-    height: 100%;
-    z-index: 100;
-}
-.large .auteurLink {
-    display: block;
-}
-.auteurLink {
-    display: none;
-}   
-
-
-/*.tileTextArea {
-    position: absolute;
-    top: -60% ;
-    left: 0;
-    width: 100%;
-    height: 50%;
-    background: rgba(0,0,0,.6);
-    font-size: 1.5em;
-    text-align: center;
-    overflow: hidden;
-    opacity: 0;
-    
-
-    transition: all .2s ease-out 0;
-    -o-transition: all .2s ease-out 0;
-    -moz-transition: all .2s ease-out 0;
-    -webkit-transition: all .2s ease-out 0;
-}*/
-.tileTextArea {
-
-    display: inline;
-    vertical-align: top;
-    vert-align: top;
-    /*padding: 1% 0 0;*/
-    font-size: 1.5em;
-    text-align: left;
- 
- 
-    
-
-    transition: all .2s ease-out 0, color .2s ease-out;
-    -o-transition: all .2s ease-out 0, color .2s ease-out;
-    -moz-transition: all .2s ease-out 0, color .2s ease-out;
-    -webkit-transition: all .2s ease-out 0, color .2s ease-out;
-}
-/*.tileTitle {
-position: absolute;    
-width: 100%;
-    left: -30px;
-    opacity: 0;
-
-      font-size: 20px;
-    font-family: ArcherLight, Helvetica, Arial, sans-serif;
-
-
-    transition: all .2s ease-out .2s;
-    -o-transition: all .2s ease-out .2s;
-    -moz-transition: all .2s ease-out .2s;
-    -webkit-transition: all .2s ease-out .2s;
-}*/
-.tileTitle {
-    position: absolute;    
-width: 100%;
-    left: 10px;
-    bottom: 0px;
-    display: none;
-
-      font-size: 20px;
-    font-family: ArcherLight, Helvetica, Arial, sans-serif;
-
-
-
-}
-
 .tileText {
-    
+    /*-webkit-column-rule: 3px outset #ff00ff;*/
+    height: -moz-calc(100% - 45px);
+    height: -webkit-calc(100% - 45px);
+    height: -o-calc(100% - 45px);
+    height: calc(100% - 45px);
+    width:400px;
+    text-align:justify;
 
-    font-size: 18px;
+    overflow-y: auto;
+	overflow-x: hidden;
+
+
+    /*font-size: 18px;*/
     font-family: ArcherLight, Helvetica, Arial, sans-serif;
 
 
@@ -141,10 +154,8 @@ width: 100%;
     -o-transition: all .2s ease-out .3s;
     -moz-transition: all .2s ease-out .3s;
 -webkit-transition: all .2s ease-out .3s;
-    display: none;
 }
 .tile:hover .tileTextArea {
-    top: 0%;
     opacity: 1;
                                  /* Ici le code pour appliquer une lueur externe */
     /* 0px de décalage en x, 0px de décalage en y, 12px de flou et la valeur en RGBA soit RedGreenBlueAlpha donc le 0.5 pour 50% d'opacité */
@@ -157,7 +168,7 @@ width: 100%;
 /*.tile:hover .tileText {  left:0;opacity: 1;color: black;}*/
 /*.tile:hover img{ opacity: 0.6;}*/
 .tile:hover {
-    background: rgba(255,255,255,.6);
+    /*background: rgba(255,255,255,.6);*/
    
 }
 
@@ -168,16 +179,6 @@ width: 100%;
     color: white;
     
 }
-
-.tile img {
-
-    transition: all .2s ease-out;
-    -o-transition: all .2s ease-out;
-    -moz-transition: all .2s ease-out;
-    -webkit-transition: all .2s ease-out;
-    
-}
-
 
 .nouveautesTitle {
     position: absolute;

@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Editions Thierry Magnier</title>
+<link href="Styles/Slider.css" rel="stylesheet" />
+    <link href="Styles/Tiles3.css" rel="stylesheet" />
+<link href="Styles/Menu3.css" rel="stylesheet" />
+
+
+    <style>
+
+        
+html, body {
+height: 100%;
+width: 100%;
+margin: 0;
+overflow: hidden; 
+}
+/*body {
+    width: 90%;
+    padding-left: 4rem;
+}*/
+
+body{
+
+background-color:black;
+}
+.backgroundHolder {
+    top:0;
+    opacity:1;
+    z-index:-1000;
+    position:absolute;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    overflow: hidden; 
+    background-color:white;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    /*background-position:98% 98%;*/
+    background-size: cover ;
+
+}
+
+  /*height : 300px;
+  white-space: nowrap;
+  overflow-y: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 1rem;
+  background-color: #ccc;*/
+  
+  
+
+    </style>
+    <script src="jquery-csswatch-master/jquery-csswatch-master/shared/jquery-1.8.2.min.js"></script>
+    <!--contains easing animations as well -->
+    <script src="jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="http://isotope.metafizzy.co/v1/jquery.isotope.min.js"></script>
+    <script>
+  
+        (function (d) { var b = ["DOMMouseScroll", "mousewheel"]; if (d.event.fixHooks) { for (var a = b.length; a;) { d.event.fixHooks[b[--a]] = d.event.mouseHooks } } d.event.special.mousewheel = { setup: function () { if (this.addEventListener) { for (var e = b.length; e;) { this.addEventListener(b[--e], c, false) } } else { this.onmousewheel = c } }, teardown: function () { if (this.removeEventListener) { for (var e = b.length; e;) { this.removeEventListener(b[--e], c, false) } } else { this.onmousewheel = null } } }; d.fn.extend({ mousewheel: function (e) { return e ? this.bind("mousewheel", e) : this.trigger("mousewheel") }, unmousewheel: function (e) { return this.unbind("mousewheel", e) } }); function c(j) { var h = j || window.event, g = [].slice.call(arguments, 1), k = 0, i = true, f = 0, e = 0; j = d.event.fix(h); j.type = "mousewheel"; if (h.wheelDelta) { k = h.wheelDelta / 120 } if (h.detail) { k = -h.detail / 3 } e = k; if (h.axis !== undefined && h.axis === h.HORIZONTAL_AXIS) { e = 0; f = -1 * k } if (h.wheelDeltaY !== undefined) { e = h.wheelDeltaY / 120 } if (h.wheelDeltaX !== undefined) { f = -1 * h.wheelDeltaX / 120 } g.unshift(j, k, f, e); return (d.event.dispatch || d.event.handle).apply(this, g) } })(jQuery);
+
+       
+
+        if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+            $(document).ready(function () {
+                $('body, html').bind('mousewheel', function (event, delta, deltaX, deltaY) {
+                    //$('html, body').stop().animate({scrollLeft: '-='+(400*delta)+'px' });
+                    $('#booksContainer').scrollLeft -= (delta * 40);
+                    /*if(delta < 0){
+                        $('body, html').scrollLeft($('body, html').scrollLeft()+50);
+                      }else{
+                        $('body, html').scrollLeft($('body, html').scrollLeft()-50);
+                    }*/
+                    event.preventDefault();
+                });
+            });
+        }
+        else {
+
+            $window = $(window);
+            $(function () {
+                $('body, html').bind('mousewheel', function (event, delta, deltaX, deltaY) {
+                    
+                    var isHorizontalMode = $window.width() > 500;
+                    if (isHorizontalMode) 
+                        $('#booksContainer').stop().animate({ scrollLeft: '-=' + (500 * delta) + 'px' }, 400, 'easeOutQuint');
+                    else
+                        $('#booksContainer').stop().animate({ scrollTop: '-=' + (500 * delta) + 'px' }, 400, 'easeOutQuint');
+                    event.preventDefault();
+                });
+            });
+        };
+
+        var xStart, yStart = 0;
+
+        //document.addEventListener('touchstart', function (e) {
+        //    xStart = e.touches[0].screenX;
+        //    yStart = e.touches[0].screenY;
+        //});
+
+        //document.addEventListener('touchmove', function (e) {
+        //    var xMovement = Math.abs(e.touches[0].screenX - xStart);
+        //    var yMovement = Math.abs(e.touches[0].screenY - yStart);
+        //    if ((yMovement * 3) > xMovement) {
+        //        e.preventDefault();
+                
+        //    }
+        //});
+     
+
+
+
+      
+        
+        $(document).ready(function () {
+
+
+            var $window = $(window);
+            var prev;
+            $('.tile').click(function () {
+                var $this = $(this);
+                
+                //var curHeight = $this.attr('curHeight');
+                //if (curHeight && curHeight == "100%") {
+                //    $this.css({ height: "auto" });
+                //    $this.attr('curHeight','auto');
+                //}
+                //else {
+                //    $this.css({ height: "100%" });
+                //    $this.attr('curHeight', '100%');
+                //}
+                
+                if (prev ) {
+                    //prev.css({ height: "auto" });
+                    prev.find(".tileTextArea").slideToggle(0);
+                    if (prev.is($this)) {
+                        prev = null;
+                        return;
+                    }
+                } 
+                
+
+                var tileTextArea = $this.find(".tileTextArea");
+                $this.find(".tileText").css({ "max-height": $('#booksContainer').height() - 100 + "px" });
+               // $(this).addClass("open");
+                tileTextArea.slideToggle(200);
+                //    .after(function () {
+
+                //});
+                prev = $this;
+            });
+
+
+
+            var $container = $('.tilesContainer');
+
+            
+            
+            
+
+
+
+            //////
+            ///// MENU
+            /////
+            
+            var previousMenuItemClicked;
+            $('.floatingmenu').click(function() {
+                //$(this).next().next().slideDown(100);
+                var menuItem = $(this).find("div");
+
+                if (previousMenuItemClicked) {
+                    if (previousMenuItemClicked.is(menuItem)) {
+                        return;
+                    } else {
+                        previousMenuItemClicked.slideToggle(100);
+                    }
+                }
+                menuItem.slideToggle(100);
+                previousMenuItemClicked = menuItem;
+            });
+
+            var previous;
+            $('.menuItem').click('click', function () {
+                var $this = $(this);
+                var test = $this.attr('id-menu');
+                var menu = $(test);
+                if (previous && previous.is(menu)) {
+                    menu.slideUp(200);
+                    previous = null;
+                    return;
+                }
+                if (previous && !previous.is(menu)) {
+                    previous.slideUp(200);
+                } 
+                menu.slideDown(200);
+                previous = menu;
+            });
+
+            var previousValue;
+            function setWindowHeight() {
+                var windowHeight = window.innerHeight;
+                document.body.style.height = windowHeight + "px";
+
+                var isHorizontalMode = $window.width() > 700;
+
+                var containerStyle = isHorizontalMode ? {
+                    height: $window.height() * 0.70,
+                } : {
+                    width: 'auto',
+                    background: 'blue',
+                };
+
+                $container.css(containerStyle);
+            }
+            //setWindowHeight();
+                        
+
+           // window.addEventListener("resize", setWindowHeight, false);
+            
+        });
+
+    </script>
+    </head>
+<body>
+    <div class="backgroundHolder"></div>
+    <div class="menu">
+            <p class="menuItem" id-menu=".menuCatalogue">projets</p>
+            <p class="menuItem" id-menu=".menuContact">contact</p>
+    </div>
+    <div class="subMenu menuCatalogue">
+            <p>You will find here the projets I've worked on listed by categories.</p>
+    </div>
+    <div class="subMenu menuContact">
+        <div class="subSubMenu">
+            <img src="images/72_26519.jpg" />
+            <div>
+                <p>Florie.briand@gmail.com</p>
+            </div>
+        </div>
+
+    </div>
+
+<div id="booksContainer" class="tilesContainer">
+
+
+        <div class="tile tag1">
+            <img src="docs%20site/Cousins%20Karlsson%203_couv.jpg" />
+            <div class="tileTextArea">
+                <span class="tileTitle">Les cousins Karlsson de Katarina Mazetti</span>
+                <p class="tileText">
+                    Projet conjointement développé avec l'aide de Noam Briand-Doudard.
+                </p>
+            </div>
+        </div>
+
+    <div class="tile tag1">
+        <img src="docs%20site/Cousins%20Karlsson%203_couv.jpg" />
+        <div class="tileTextArea">
+            <span class="tileTitle">Les cousins Karlsson de Katarina Mazetti</span>
+            <p class="tileText">
+                Projet conjointement développé avec l'aide de Noam Briand-Doudard.
+            </p>
+        </div>
+    </div>
+
+    <div class="tile tag1">
+        <img src="docs%20site/Cousins%20Karlsson%203_couv.jpg" />
+        <div class="tileTextArea">
+            <span class="tileTitle">Les cousins Karlsson de Katarina Mazetti</span>
+            <p class="tileText">
+                Projet conjointement développé avec l'aide de Noam Briand-Doudard.
+            </p>
+        </div>
+    </div>
+
+    <div class="tile tag1">
+        <img src="docs%20site/Cousins%20Karlsson%203_couv.jpg" />
+        <div class="tileTextArea">
+            <span class="tileTitle">Les cousins Karlsson de Katarina Mazetti</span>
+            <p class="tileText">
+                Projet conjointement développé avec l'aide de Noam Briand-Doudard.
+            </p>
+        </div>
+    </div>
+
+    <div class="tile tag1">
+        <img src="docs%20site/Cousins%20Karlsson%203_couv.jpg" />
+        <div class="tileTextArea">
+            <span class="tileTitle">Les cousins Karlsson de Katarina Mazetti</span>
+            <p class="tileText">
+                Projet conjointement développé avec l'aide de Noam Briand-Doudard.
+            </p>
+        </div>
+    </div>
+
+    </div>
+
+    
+</body>
+</html>

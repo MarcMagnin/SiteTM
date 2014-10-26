@@ -69,7 +69,8 @@ background-size: cover ;
     <script src="jquery-csswatch-master/jquery-csswatch-master/shared/jquery-1.8.2.min.js"></script>
     <!--contains easing animations as well -->
     <script src="jquery-ui-1.10.3.custom.min.js"></script>
-    <script src="http://isotope.metafizzy.co/v1/jquery.isotope.min.js"></script>
+    <script src="isotope/jquery.isotope.min.js"></script>
+    <!--<script src="http://isotope.metafizzy.co/v1/jquery.isotope.min.js"></script>-->
     <script>
   
         (function (d) { var b = ["DOMMouseScroll", "mousewheel"]; if (d.event.fixHooks) { for (var a = b.length; a;) { d.event.fixHooks[b[--a]] = d.event.mouseHooks } } d.event.special.mousewheel = { setup: function () { if (this.addEventListener) { for (var e = b.length; e;) { this.addEventListener(b[--e], c, false) } } else { this.onmousewheel = c } }, teardown: function () { if (this.removeEventListener) { for (var e = b.length; e;) { this.removeEventListener(b[--e], c, false) } } else { this.onmousewheel = null } } }; d.fn.extend({ mousewheel: function (e) { return e ? this.bind("mousewheel", e) : this.trigger("mousewheel") }, unmousewheel: function (e) { return this.unbind("mousewheel", e) } }); function c(j) { var h = j || window.event, g = [].slice.call(arguments, 1), k = 0, i = true, f = 0, e = 0; j = d.event.fix(h); j.type = "mousewheel"; if (h.wheelDelta) { k = h.wheelDelta / 120 } if (h.detail) { k = -h.detail / 3 } e = k; if (h.axis !== undefined && h.axis === h.HORIZONTAL_AXIS) { e = 0; f = -1 * k } if (h.wheelDeltaY !== undefined) { e = h.wheelDeltaY / 120 } if (h.wheelDeltaX !== undefined) { f = -1 * h.wheelDeltaX / 120 } g.unshift(j, k, f, e); return (d.event.dispatch || d.event.handle).apply(this, g) } })(jQuery);
@@ -108,19 +109,19 @@ background-size: cover ;
 
         var xStart, yStart = 0;
 
-        document.addEventListener('touchstart', function (e) {
-            xStart = e.touches[0].screenX;
-            yStart = e.touches[0].screenY;
-        });
+        //document.addEventListener('touchstart', function (e) {
+        //    xStart = e.touches[0].screenX;
+        //    yStart = e.touches[0].screenY;
+        //});
 
-        document.addEventListener('touchmove', function (e) {
-            var xMovement = Math.abs(e.touches[0].screenX - xStart);
-            var yMovement = Math.abs(e.touches[0].screenY - yStart);
-            if ((yMovement * 3) > xMovement) {
-                e.preventDefault();
+        //document.addEventListener('touchmove', function (e) {
+        //    var xMovement = Math.abs(e.touches[0].screenX - xStart);
+        //    var yMovement = Math.abs(e.touches[0].screenY - yStart);
+        //    if ((yMovement * 3) > xMovement) {
+        //        e.preventDefault();
                 
-            }
-        });
+        //    }
+        //});
      
 
 
@@ -128,14 +129,8 @@ background-size: cover ;
       
         
         $(document).ready(function () {
-            $('.tile').click(function () {
-                
-                var tileTextArea = $(this).find(".tileText");
-                tileTextArea.slideToggle(0).after(function() {
-                    $container.isotope('reLayout');
-                });
-                
-            });
+           
+
 
 
             var $window = $( window );
@@ -143,8 +138,77 @@ background-size: cover ;
 
             var $container = $('.tilesContainer');
 
-            
-            
+            //// TILE CLICK
+            var prev;
+            $('.tile').click(function () {
+                var $this = $(this);
+
+                // filters
+                $this.find("a").click(function () {
+                    var selector = $(this).attr('data-filter');
+                    $container.isotope({ filter: selector });
+                    //setTimeout(function () {
+                        //$('.isotope-hidden').css({ "display": "none" })
+                    //}, 300);
+                });
+
+                
+
+
+                if (prev) {
+                    //prev.find(".tileTextArea").slideToggle(0);
+                    //$container.isotope('reLayout');
+                    if (prev.is($this)) {
+                        return;
+                    } else {
+                        prev.find(".tileTextArea").slideToggle(0);
+                        prev.find(".tileLeftPartDetails").css(
+                        {
+                            "display": "none",
+                        });
+                        var image = prev.find("img");
+                        if (image.attr('prevHeight')) {
+                            image.animate({ "height": image.attr('prevHeight') + "px" }, 300, 'easeOutCubic');
+                        }
+                       // prev.find("img").animate({ "height": "100%" }, 300, 'easeOutCubic');
+                        //prev.find("img").toggleClass("smallHeightImage");
+                    }
+                }
+
+                $this.find(".tileLeftPartDetails").css(
+                    {
+                        "display": "ms-flexbox",
+                        "display": "flex",
+                        
+
+                });
+                var tileTextArea = $this.find(".tileTextArea");
+                //$this.find("img").toggleClass("smallHeightImage");
+                var image = $this.find("img");
+                if (image.height() > 280) {
+                    image.attr('prevHeight', image.height()) ;
+                    $this.find("img").animate({ "height": "280px" }, 300, 'easeOutCubic');
+                }
+                
+                tileTextArea.css({
+                    "max-height": $('#booksContainer').height() + "px",
+                    "display": "inline-block",
+                    //"display": "flex",
+                });
+                $container.isotope('reLayout');
+                tileTextArea.hide(0);
+                tileTextArea.show(300, function () {
+                    $container.isotope('reLayout');
+                });
+                //    .after(function () {
+                //        $container.isotope('reLayout');
+                //        setTimeout(function () {
+                //            $container.isotope('reLayout');
+                //        },100);
+                //    });
+                
+                prev = $this;
+            });
             
 
 
@@ -202,6 +266,7 @@ background-size: cover ;
                         }
 
                     });
+
                 } else if (previousValue && previousValue == isHorizontalMode && $window.width() > 900) {
                     var images = $container.find('img');
                     images.each(function () {
@@ -247,17 +312,19 @@ background-size: cover ;
             // change layout mode
             $container.isotope({ layoutMode: "masonryHorizontal" });
 
-            setWindowHeight();
+          //  setWindowHeight();
             
 
 
-            window.addEventListener("resize", setWindowHeight, false);
+           // window.addEventListener("resize", setWindowHeight, false);
             
         });
 
     </script>
     </head>
 <body>
+    <p class="footer">Designed by <a href="http://" target="_blank">Florie Briand</a> and Marc Magnin - 2014 </p>
+
     <div class="menu">
             <p class="menuItem" id-menu=".menuCatalogue">catalogue</p>
             <p class="menuItem" id-menu=".menuUnivers">univers</p>
@@ -294,38 +361,105 @@ background-size: cover ;
                
             </ul>
         </div>-->
-    <div class="hostContainer">
+  
 <div id="booksContainer" class="tilesContainer">
 
 
-
-        <div class="tile tag1">
+    <div class="tile tag1">
+        <div class="tileLeftPart">
             <img src="images/66_9043.jpg" alt="image" />
-            <span class="tileTitle">Art Factory</span>
-            <div class="tileTextArea">
-                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
-            </div>
-        </div>
-
-
-        <div class="tile tag2">
-            <img src="images/67_1873.jpg" alt="image" />
-            <span class="tileTitle">Art Factory</span>
-            <div class="tileTextArea">
+            <div class="tileLeftPartDetails">
                 
-                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
-                <!--<div class="button">SHOP NOW</div>-->
-            </div>
-        </div>
+                Thèmes
+                <a href="#" data-filter="*">Tous</a>
+                <a href="#" data-filter=".tag1">Animaux / Bestiaires</a>
+                <a href="#" data-filter=".tag2">Humour</a>
+                <a href="#" data-filter=".tag3">Autre</a>
+                <p>septembre 2014</p>
+                 <p>10 x 20 cm</p>
+                 <p>32 pages</p>
+                <p>ISBN 978-2-36474-505-6</p>
+                <p>prix indicatif : 10.90 €</p> 
 
-        <div class="tile tag1">
-            <img src="docs%20site/Cousins%20Karlsson%203_couv.jpg" />
-            <div class="tileTextArea">
-                <span class="tileTitle">Art Factory</span>
-                <span class="tileText">Arts  dépendants.       dsfsdfsd sf sdf s f</span>
-                <!--<div class="button">SHOP NOW</div>-->
             </div>
         </div>
+        <div class="tileTextArea">
+                <h1 class="tileTitle">Art Factory</h1>
+                <p class="tileText">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                </p>
+            <p>
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+            </p>
+
+            <h1 class="tileTitle">Extraits</h1>
+            <img src="images/extrait/extrait1.jpg" />
+            <img src="images/extrait/extrait2.jpg" />
+        </div>
+    </div>
+
+    <div class="tile tag1">
+        <div class="tileLeftPart">
+            <img src="images/67_1873.jpg" alt="image" />
+            <div class="tileLeftPartDetails">
+
+                Thèmes
+                <a href="#" data-filter=".tag1">Animaux / Bestiaires</a>
+                <a href="#">Humour</a>
+                <p>septembre 2014</p>
+                <p>10 x 20 cm</p>
+                <p>32 pages</p>
+                <p>ISBN 978-2-36474-505-6</p>
+                <p>prix indicatif : 10.90 €</p>
+
+            </div>
+        </div>
+        <div class="tileTextArea">
+            <h1 class="tileTitle">Art Factory</h1>
+            <p class="tileText">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+            <p>
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+            </p>
+
+            <h1 class="tileTitle">Extraits</h1>
+            <img src="images/extrait/extrait1.jpg" />
+            <img src="images/extrait/extrait2.jpg" />
+        </div>
+    </div>
+
+    <div class="tile tag1">
+        <div class="tileLeftPart">
+            <img src="docs%20site/Cousins%20Karlsson%203_couv.jpg" />
+            <div class="tileLeftPartDetails">
+
+                Thèmes
+                <a href="">Animaux / Bestiaires</a>
+                <a href="">Humour</a>
+                <p>septembre 2014</p>
+                <p>10 x 20 cm</p>
+                <p>32 pages</p>
+                <p>ISBN 978-2-36474-505-6</p>
+                <p>prix indicatif : 10.90 €</p>
+
+            </div>
+        </div>
+        <div class="tileTextArea">
+            <h1 class="tileTitle">Art Factory</h1>
+            <p class="tileText">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+            <p>
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+            </p>
+
+            <h1 class="tileTitle">Extraits</h1>
+            <img src="images/extrait/extrait1.jpg" />
+            <img src="images/extrait/extrait2.jpg" />
+        </div>
+    </div>
+
 
         <div class="tile tag3">
             <img src="images/68_68619.jpg" alt="image" />
@@ -782,9 +916,5 @@ background-size: cover ;
 
     </div>
 
-	</div>
-
-
-    
 </body>
 </html>
