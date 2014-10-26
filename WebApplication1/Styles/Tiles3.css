@@ -7,7 +7,7 @@
     height: -o-calc(100% - 250px);
     height: calc(100% - 250px);
     
-    display : -ms-flexbox   ;
+    display : -ms-flexbox;
     display : flex;
     
     

@@ -5,12 +5,11 @@
     font-size:0.8em;
 }
 .isotope-hidden {
-
-    
-    
-    
     display:none !important;
+    /*transform: translate3d(0px, 0px, 0px) scale3d(0.001, 0.001, 1) !important;*/
 }
+
+
 .tilesContainer {
   padding-left:150px;
     padding-bottom:150px;
@@ -65,15 +64,16 @@ p {
     padding: 5px;
     margin-right: 3px;
     margin-top: 3px; 
-    transition: all .3s ease-out 0;
-    -o-transition: all .3s ease-out 0;
-    -moz-transition: all .3s ease-out 0;
-    -webkit-transition: all .3s ease-out 0;
+    
+   
+     
+    -o-transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -webkit-transition: all 0.3s ease-out;/*, position 0s linear 1s;*/
+    transition: all .3s ease-out;
+   
 
-    -webkit-transition: display 0.3s linear .3s;
-    -o-transition: display 0.3s linear .3s;
-    -moz-transition: display 0.3s linear .3s;
-    transition: display 0.3s linear .3s;
+    
     
 }
 
